@@ -20,16 +20,19 @@ while True:
 
     if envent == sg.WIN_CLOSED:
         break
-    
-    if envent == 'calcular':
-        imc = calculo(values['altura'],values['peso'])
-        resposta = mensagem(imc)
-        if resposta == 'Sobrepeso':   
-            window['alerta'].update(resposta,text_color='yellow')
-        elif resposta == 'Obesidade Grau II':   
-            window['alerta'].update(resposta,text_color='orange')
-        elif resposta == 'Obesidade Grave':   
-            window['alerta'].update(resposta,text_color='red')
-        else:
-            window['alerta'].update(resposta,text_color='black')
-        window['imc'].update(f'IMC {imc:.1f}')
+    try:
+        if envent == 'calcular':
+            imc = calculo(values['altura'],values['peso'])
+            resposta = mensagem(imc)
+            if resposta == 'Sobrepeso':   
+                window['alerta'].update(resposta,text_color='yellow')
+            elif resposta == 'Obesidade Grau II':   
+                window['alerta'].update(resposta,text_color='orange')
+            elif resposta == 'Obesidade Grave':   
+                window['alerta'].update(resposta,text_color='red')
+            else:
+                window['alerta'].update(resposta,text_color='black')
+            window['imc'].update(f'IMC {imc:.1f}')
+    except:
+        window['alerta'].update('Informações inválidas',text_color='red')
+        window['imc'].update('')
